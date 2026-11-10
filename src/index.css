@@ -66,7 +66,7 @@ body {
 .menu {
   flex: 1;
   width: 100%;
-  max-width: 110rem;
+  max-width: 96rem;
   margin: 0 auto;
   padding: 4.8rem 2.4rem;
 }
@@ -90,22 +90,27 @@ body {
   padding-left: 2.2rem;
 }
 
-/* 3 columns of cards with the photo on top */
+/* One pizza per row: big photo on one side, text on the other */
 .pizzas {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
 }
 
 .pizza {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
   background-color: var(--card);
   border-radius: 1.6rem;
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
   transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Every 2nd pizza: photo on the right side */
+.pizza:nth-child(even) {
+  flex-direction: row-reverse;
 }
 
 .pizza:hover {
@@ -114,7 +119,7 @@ body {
 }
 
 .pizza img {
-  width: 100%;
+  width: 45%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
@@ -123,13 +128,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1.8rem 2rem 2rem;
+  padding: 3.2rem 4rem;
+  justify-content: center;
   flex: 1;
 }
 
 .pizza h3 {
   font-family: "Playfair Display", serif;
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 500;
 }
 
@@ -138,13 +144,17 @@ body {
   font-weight: 300;
   line-height: 1.5;
   color: var(--muted);
-  margin-bottom: auto;
+}
+
+.pizza p {
+  font-size: 1.6rem;
 }
 
 .pizza-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 2.4rem;
+  margin-top: 0.8rem;
 }
 
 .price {
@@ -245,17 +255,26 @@ body {
 
 /* ---------- Responsive ---------- */
 
-/* Tablets: 2 columns */
+/* Tablets: smaller padding */
 @media (max-width: 900px) {
-  .pizzas {
-    grid-template-columns: repeat(2, 1fr);
+  .pizza-info {
+    padding: 2.4rem;
+  }
+
+  .pizza h3 {
+    font-size: 2.4rem;
   }
 }
 
-/* Phones: 1 column, header and footer stack */
+/* Phones: photo on top, text below, header and footer stack */
 @media (max-width: 560px) {
-  .pizzas {
-    grid-template-columns: 1fr;
+  .pizza,
+  .pizza:nth-child(even) {
+    flex-direction: column;
+  }
+
+  .pizza img {
+    width: 100%;
   }
 
   .header {
