@@ -19,106 +19,107 @@ function App() {
   );
 }
 
-// Tagline only shows when the shop is open (&& operator, Lesson 4)
+// Header banner. Tagline only shows when the shop is open (&& operator, Lesson 4)
 function Header() {
   return (
     <header className="header">
-      <h1>Bella Napoli Pizza Co.</h1>
-      {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
+      <span className="logo">🍕</span>
+      <div>
+        <h1>Bella Napoli</h1>
+        {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
+      </div>
     </header>
   );
 }
 
 // Menu: loops through the pizza array with map() and a key (Lesson 4)
-// Extra feature: "Show favourites only" toggle using state (Lesson 8)
 function Menu() {
-  const [favourites, setFavourites] = useState([]);
-  const [showFavOnly, setShowFavOnly] = useState(false);
-
-  function handleToggleFav(name) {
-    if (favourites.includes(name)) {
-      setFavourites(favourites.filter((fav) => fav !== name));
-    } else {
-      setFavourites([...favourites, name]);
-    }
-  }
-
-  function handleShowFavOnly() {
-    setShowFavOnly(!showFavOnly);
-  }
-
-  const pizzasToShow = showFavOnly
-    ? pizzaData.filter((pizza) => favourites.includes(pizza.name))
-    : pizzaData;
-
   return (
     <main className="menu">
-      <h2>Our Menu</h2>
-      <p className="intro">
-        Authentic Italian cuisine. {pizzaData.length} creative dishes to choose
-        from. All from our stone oven, all organic, all delicious.
-      </p>
-
-      <section className="menu-tools" aria-label="Menu options">
-        <span>♥ Favourites: {favourites.length}</span>
-        <Button onClick={handleShowFavOnly}>
-          {showFavOnly ? "Show all pizzas" : "Show favourites only"}
-        </Button>
+      <section className="menu-title">
+        <h2>Today's Pizzas</h2>
+        <p>Hand-stretched dough, fresh toppings, baked to order.</p>
       </section>
 
-      {pizzasToShow.length > 0 ? (
-        <ul className="pizzas">
-          {pizzasToShow.map((pizza) => (
-            <Pizza
-              key={pizza.name}
-              name={pizza.name}
-              ingredients={pizza.ingredients}
-              price={pizza.price}
-              photoName={pizza.photoName}
-              soldOut={pizza.soldOut}
-              isFav={favourites.includes(pizza.name)}
-              onToggleFav={handleToggleFav}
-            />
-          ))}
-        </ul>
-      ) : (
-        <p className="empty">
-          No favourites yet. Tap the heart on a pizza to add it!
-        </p>
-      )}
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza
+            key={pizza.name}
+            name={pizza.name}
+            ingredients={pizza.ingredients}
+            price={pizza.price}
+            photoName={pizza.photoName}
+            soldOut={pizza.soldOut}
+          />
+        ))}
+      </ul>
     </main>
   );
 }
 
-// Reusable Pizza component, props destructured (Lesson 5)
-function Pizza({ name, ingredients, price, photoName, soldOut, isFav, onToggleFav }) {
-  function handleClick() {
-    onToggleFav(name);
-  }
-
+// Reusable Pizza component with destructured props (Lesson 5)
+function Pizza({ name, ingredients, price, photoName, soldOut }) {
   return (
     <li className={soldOut ? "pizza sold-out" : "pizza"}>
       <img src={photoName} alt={name} />
-      <div>
+      <div className="pizza-info">
         <h3>{name}</h3>
         <p>{ingredients}</p>
-        <span className="price">{soldOut ? "SOLD OUT" : "$" + price}</span>
-        <button
-          className={isFav ? "fav-btn active" : "fav-btn"}
-          onClick={handleClick}
-          aria-label={isFav ? "Remove from favourites" : "Add to favourites"}
-        >
-          {isFav ? "♥ Favourite" : "♡ Add to favourites"}
-        </button>
+        <div className="pizza-bottom">
+          <span className="price">{soldOut ? "SOLD OUT" : "$" + price}</span>
+          <FavButton />
+        </div>
+        {/* Quantity picker only shows if the pizza is not sold out (&&, Lesson 4) */}
+        {!soldOut && <Quantity />}
       </div>
     </li>
+  );
+}
+
+// Extra feature 1: Favourite heart (state, Lesson 8)
+function FavButton() {
+  const [isFav, setIsFav] = useState(false);
+
+  function handleClick() {
+    setIsFav(!isFav);
+  }
+
+  return (
+    <button
+      className={isFav ? "fav-btn active" : "fav-btn"}
+      onClick={handleClick}
+      aria-label={isFav ? "Remove from favourites" : "Add to favourites"}
+    >
+      {isFav ? "♥" : "♡"}
+    </button>
+  );
+}
+
+// Extra feature 2: Quantity picker, 0 to 10 (like the Step activity, Lesson 8)
+function Quantity() {
+  const [qty, setQty] = useState(0);
+
+  function handleMinus() {
+    if (qty > 0) setQty(qty - 1);
+  }
+
+  function handlePlus() {
+    if (qty < 10) setQty(qty + 1);
+  }
+
+  return (
+    <div className="qty">
+      <Button onClick={handleMinus}>−</Button>
+      <span>{qty}</span>
+      <Button onClick={handlePlus}>+</Button>
+    </div>
   );
 }
 
 // Reusable button: props.children + event handler passed as a prop (Lesson 6)
 function Button({ onClick, children }) {
   return (
-    <button className="btn btn-small" onClick={onClick}>
+    <button className="qty-btn" onClick={onClick}>
       {children}
     </button>
   );
@@ -132,8 +133,8 @@ function Footer() {
         <Order closeHour={closeHour} />
       ) : (
         <p>
-          Sorry, we're closed. We're happy to welcome you between {openHour}:00
-          and {closeHour}:00.
+          Sorry, we're closed. Come back between {openHour}:00 and {closeHour}
+          :00.
         </p>
       )}
     </footer>
@@ -148,7 +149,7 @@ function Order({ closeHour = 22 }) {
 
   return (
     <div className="order">
-      <p>We're currently open until {closeHour}:00. Come visit us or order online.</p>
+      <p>We're currently open until {closeHour}:00.</p>
       <button className="btn" onClick={handleOrder}>
         Order
       </button>
