@@ -1,13 +1,293 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Lato:wght@300;400;700&display=swap");
+
+/* Colours: tomato red, basil green, cream (Italian flag feel) */
+:root {
+  --red: #b83227;
+  --red-dark: #8f241b;
+  --green: #2f6b3a;
+  --cream: #fdf8ef;
+  --card: #ffffff;
+  --text: #2b2420;
+  --muted: #8a817a;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  color: var(--text);
+  background-color: var(--cream);
+  border-top: 0.8rem solid var(--green);
+  border-bottom: 0.8rem solid var(--red);
+  min-height: 100vh;
+  padding: 4rem 1.6rem 6rem;
+}
+
+.container {
+  max-width: 96rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4.8rem;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  align-self: stretch;
+  text-align: center;
+}
+
+.header h1 {
+  font-family: "Playfair Display", serif;
+  color: var(--red);
+  font-size: 5.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.header h1::before,
+.header h1::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(50% - 1px);
+  height: 3px;
+  width: 8rem;
+  background-color: var(--green);
+}
+
+.header h1::before {
+  left: 0;
+}
+
+.header h1::after {
+  right: 0;
+}
+
+.tagline {
+  margin-top: 1.2rem;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--green);
+}
+
+/* ---------- Menu ---------- */
+
+.menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.2rem;
+}
+
+.menu h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  padding: 0.8rem 2.4rem;
+  border-top: 2px solid var(--red);
+  border-bottom: 2px solid var(--red);
+}
+
+.intro {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 60rem;
+  color: var(--muted);
+}
+
+.menu-tools {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.empty {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.pizzas {
+  list-style: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem;
+}
+
+.pizza {
+  display: flex;
+  gap: 2rem;
+  padding: 1.6rem;
+  background-color: var(--card);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pizza:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.pizza img {
+  width: 12rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  align-self: center;
+  border: 4px solid var(--cream);
+}
+
+.pizza div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.pizza h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.pizza p {
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: auto;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.pizza.sold-out {
+  color: var(--muted);
+}
+
+.pizza.sold-out .price {
+  color: var(--red);
+  letter-spacing: 2px;
+}
+
+.pizza.sold-out img {
+  filter: grayscale();
+  opacity: 0.7;
+}
+
+.fav-btn {
+  align-self: start;
+  font-family: inherit;
+  font-size: 1.3rem;
+  color: var(--red);
+  background: none;
+  border: 1px solid var(--red);
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fav-btn:hover,
+.fav-btn.active {
+  background-color: var(--red);
+  color: #fff;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--red);
+  border: none;
+  border-radius: 999px;
+  padding: 1.4rem 4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--red-dark);
+}
+
+.btn-small {
+  font-size: 1.3rem;
+  padding: 0.8rem 2rem;
+  background-color: var(--green);
+}
+
+/* ---------- Responsive: tablets & phones ---------- */
+
+@media (max-width: 700px) {
+  .pizzas {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 3.6rem;
+  }
+
+  .header h1::before,
+  .header h1::after {
+    display: none;
+  }
+
+  .menu-tools {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .pizza {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pizza div,
+  .fav-btn {
+    align-items: center;
+    align-self: center;
+  }
 }
