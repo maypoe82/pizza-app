@@ -45,17 +45,14 @@ function Header() {
 function Hero() {
   return (
     <section className="hero">
-      <h2>Fresh Italian pizza, made with amore</h2>
+      <h2>Fresh Italian pizza, made with love</h2>
       <p>Stone-baked in Naples style. Pick your favourite below.</p>
-
-      <div className="hero-pic">
-        <img src="pizzas/prosciutto.jpg" alt="Pizza Prosciutto" />
-        {/* Floating ingredients just for decoration */}
-        <span className="deco deco-1" aria-hidden="true">🍅</span>
-        <span className="deco deco-2" aria-hidden="true">🌿</span>
-        <span className="deco deco-3" aria-hidden="true">🧄</span>
-        <span className="deco deco-4" aria-hidden="true">🫒</span>
+      <div className="flag" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
+
     </section>
   );
 }

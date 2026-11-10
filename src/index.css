@@ -2,10 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 :root {
-  --red: #e53935;
-  --red-dark: #c62828;
-  --green: #43a047;
-  --bg: #f4f6fa;
+  /* Italian flag colours */
+  --red: #cd212a;
+  --red-dark: #a51b22;
+  --green: #008c45;
+  --green-dark: #006b35;
+  --bg: #faf7f0;
   --card: #ffffff;
   --text: #1f2430;
   --text-soft: #6b7280;
@@ -46,7 +48,8 @@ body {
   align-items: center;
   gap: 1.6rem;
   padding: 2rem 4rem;
-  border-bottom: 1px solid var(--line);
+  border-top: 8px solid;
+  border-image: linear-gradient(to right, #008c45 33.3%, #ffffff 33.3% 66.6%, #cd212a 66.6%) 1;
 }
 
 .hours {
@@ -59,6 +62,7 @@ body {
 }
 
 .header h1 {
+  color: var(--green);
   font-size: 2.6rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -98,6 +102,7 @@ body {
 }
 
 .hero h2 {
+  color: var(--green-dark);
   font-size: 4.2rem;
   font-weight: 700;
   line-height: 1.2;
@@ -111,46 +116,30 @@ body {
   margin-top: 1.2rem;
 }
 
-.hero-pic {
-  position: relative;
-  width: 32rem;
-  max-width: 80%;
-  margin: 4rem auto 0;
+/* Italian flag stripe under the hero text */
+.flag {
+  display: flex;
+  width: 15rem;
+  height: 0.8rem;
+  margin: 3rem auto 0;
+  border-radius: 999px;
+  overflow: hidden;
 }
 
-.hero-pic img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1rem solid #fff;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+.flag span {
+  flex: 1;
 }
 
-/* Floating ingredient decorations */
-.deco {
-  position: absolute;
-  font-size: 4rem;
+.flag span:nth-child(1) {
+  background-color: var(--green);
 }
 
-.deco-1 {
-  top: 0;
-  left: -6rem;
+.flag span:nth-child(2) {
+  background-color: #ffffff;
 }
 
-.deco-2 {
-  top: 2rem;
-  right: -6rem;
-}
-
-.deco-3 {
-  bottom: 2rem;
-  left: -7rem;
-}
-
-.deco-4 {
-  bottom: -1rem;
-  right: -5rem;
+.flag span:nth-child(3) {
+  background-color: var(--red);
 }
 
 /* ---------- Menu ---------- */
@@ -292,18 +281,18 @@ body {
   height: 4.4rem;
   border-radius: 50%;
   border: none;
-  background-color: var(--red);
+  background-color: var(--green);
   color: #fff;
   font-family: inherit;
   font-size: 2.4rem;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(229, 57, 53, 0.3);
+  box-shadow: 0 6px 14px rgba(0, 140, 69, 0.3);
   transition: background-color 0.2s;
 }
 
 .qty-btn:hover {
-  background-color: var(--red-dark);
+  background-color: var(--green-dark);
 }
 
 button:focus-visible {
@@ -315,6 +304,8 @@ button:focus-visible {
 
 .footer {
   text-align: center;
+  border-bottom: 8px solid;
+  border-image: linear-gradient(to right, #008c45 33.3%, #ffffff 33.3% 66.6%, #cd212a 66.6%) 1;
   padding: 5rem 2rem 3rem;
   background-color: var(--bg);
 }
@@ -343,7 +334,7 @@ button:focus-visible {
   border-radius: 999px;
   padding: 1.4rem 6rem;
   cursor: pointer;
-  box-shadow: 0 10px 22px rgba(229, 57, 53, 0.3);
+  box-shadow: 0 10px 22px rgba(205, 33, 42, 0.3);
   transition: background-color 0.2s;
 }
 
@@ -361,8 +352,8 @@ button:focus-visible {
 
 /* ---------- Responsive ---------- */
 
-/* Tablets: 2 cards per row */
-@media (max-width: 900px) {
+/* Small tablets: 2 cards per row */
+@media (max-width: 760px) {
   .pizzas {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -396,17 +387,4 @@ button:focus-visible {
     font-size: 2.8rem;
   }
 
-  .deco {
-    font-size: 3rem;
-  }
-
-  .deco-1,
-  .deco-3 {
-    left: -3.6rem;
-  }
-
-  .deco-2,
-  .deco-4 {
-    right: -3.6rem;
-  }
 }
