@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import pizzaData from "./data";
-
-// Shop opens 10am to 10pm (Lesson 5, Activity 7)
 const hour = new Date().getHours();
 const isOpen = hour >= 10 && hour < 22;
 
@@ -19,8 +17,6 @@ function App() {
     </div>
   );
 }
-
-// Italian flag stripe, reused at the top and bottom of the page
 function Flag() {
   return (
     <div className="flag">
@@ -30,8 +26,6 @@ function Flag() {
     </div>
   );
 }
-
-// Tagline only shows when the shop is open (&& operator, Lesson 4)
 function Header() {
   return (
     <header className="header">
@@ -40,7 +34,6 @@ function Header() {
         <h1>Pizzeria Amore</h1>
         {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
       </div>
-      {/* Open / closed badge (ternary operator, Lesson 4) */}
       <p className={isOpen ? "status open" : "status closed"}>
         {isOpen ? "Open now" : "Closed now"}
       </p>
@@ -56,8 +49,6 @@ function Hero() {
     </section>
   );
 }
-
-// Loop through the pizza array with map() and a key (Lesson 4)
 function Menu() {
   return (
     <main className="menu">
@@ -81,8 +72,6 @@ function Menu() {
     </main>
   );
 }
-
-// Reusable Pizza component, props destructured (Lesson 5)
 function Pizza({ name, ingredients, price, photoName, soldOut }) {
   return (
     <li className={soldOut ? "pizza sold-out" : "pizza"}>
@@ -96,8 +85,6 @@ function Pizza({ name, ingredients, price, photoName, soldOut }) {
     </li>
   );
 }
-
-// Extra feature 1: favourite heart (useState, Lesson 8)
 function FavButton() {
   const [isFav, setIsFav] = useState(false);
 
@@ -111,8 +98,6 @@ function FavButton() {
     </button>
   );
 }
-
-// Extra feature 2: quantity from 0 to 10 (like the Step activity, Lesson 8)
 function Quantity() {
   const [qty, setQty] = useState(0);
 
@@ -132,8 +117,6 @@ function Quantity() {
     </div>
   );
 }
-
-// Reusable button: props.children + event handler as a prop (Lesson 6)
 function Button(props) {
   return (
     <button className="qty-btn" onClick={props.onClick}>
@@ -141,8 +124,6 @@ function Button(props) {
     </button>
   );
 }
-
-// Open or closed message (ternary operator, Lesson 4)
 function Footer() {
   return (
     <footer className="footer">
@@ -155,8 +136,6 @@ function Footer() {
     </footer>
   );
 }
-
-// Order component taken out of Footer, with a default prop value (Lesson 6)
 function Order({ closeHour = 10 }) {
   function handleOrder() {
     alert("Thanks for your order!");
