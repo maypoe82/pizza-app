@@ -3,67 +3,67 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import pizzaData from "./data";
 
-// Shop opening hours: 10am to 10pm (Lesson 5, Activity 7)
-const openHour = 10;
-const closeHour = 22;
+// Shop opens 10am to 10pm (Lesson 5, Activity 7)
 const hour = new Date().getHours();
-const isOpen = hour >= openHour && hour < closeHour;
+const isOpen = hour >= 10 && hour < 22;
 
 function App() {
   return (
     <div className="container">
+      <Flag />
       <Header />
       <Hero />
       <Menu />
       <Footer />
+      <Flag />
     </div>
   );
 }
 
-// Top bar. Tagline only shows when the shop is open (&& operator, Lesson 4)
+// Italian flag stripe, reused at the top and bottom of the page
+function Flag() {
+  return (
+    <div className="flag">
+      <div className="green"></div>
+      <div className="white"></div>
+      <div className="red"></div>
+    </div>
+  );
+}
+
+// Tagline only shows when the shop is open (&& operator, Lesson 4)
 function Header() {
   return (
     <header className="header">
-      <p className="hours">
-        Daily {openHour}am – {closeHour - 12}pm
-      </p>
-
+      <p className="hours">Daily 10am - 10pm</p>
       <div className="brand">
         <h1>Pizzeria Amore</h1>
         {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
       </div>
-
-      {/* Open / closed badge (ternary, Lesson 4) */}
+      {/* Open / closed badge (ternary operator, Lesson 4) */}
       <p className={isOpen ? "status open" : "status closed"}>
-        {isOpen ? "● Open now" : "● Closed now"}
+        {isOpen ? "Open now" : "Closed now"}
       </p>
     </header>
   );
 }
 
-// Big welcome section with a round pizza photo
 function Hero() {
   return (
     <section className="hero">
       <h2>Fresh Italian pizza, made with love</h2>
       <p>Stone-baked in Naples style. Pick your favourite below.</p>
-      <div className="flag" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
     </section>
   );
 }
 
-// Menu: loops through the pizza array with map() and a key (Lesson 4)
+// Loop through the pizza array with map() and a key (Lesson 4)
 function Menu() {
   return (
     <main className="menu">
       <h2>Popular Pizzas</h2>
       <p className="menu-hint">
-        Tap ♡ to save a favourite, use − and + to choose how many.
+        Tap the heart to save a favourite. Use - and + to choose how many.
       </p>
 
       <ul className="pizzas">
@@ -82,26 +82,22 @@ function Menu() {
   );
 }
 
-// Reusable Pizza component with destructured props (Lesson 5)
+// Reusable Pizza component, props destructured (Lesson 5)
 function Pizza({ name, ingredients, price, photoName, soldOut }) {
   return (
     <li className={soldOut ? "pizza sold-out" : "pizza"}>
-      {/* Sold out badge (&&, Lesson 4) */}
       {soldOut && <span className="badge">Sold out</span>}
       <FavButton />
-
       <img src={photoName} alt={name} />
       <h3>{name}</h3>
       <p>{ingredients}</p>
       <span className="price">{soldOut ? "Not available" : "$" + price}</span>
-
-      {/* Quantity picker only shows if the pizza is not sold out (&&, Lesson 4) */}
       {!soldOut && <Quantity />}
     </li>
   );
 }
 
-// Extra feature 1: Favourite heart (state, Lesson 8)
+// Extra feature 1: favourite heart (useState, Lesson 8)
 function FavButton() {
   const [isFav, setIsFav] = useState(false);
 
@@ -110,17 +106,13 @@ function FavButton() {
   }
 
   return (
-    <button
-      className={isFav ? "fav-btn active" : "fav-btn"}
-      onClick={handleClick}
-      aria-label={isFav ? "Remove from favourites" : "Add to favourites"}
-    >
+    <button className={isFav ? "fav-btn active" : "fav-btn"} onClick={handleClick}>
       {isFav ? "♥" : "♡"}
     </button>
   );
 }
 
-// Extra feature 2: Quantity picker, 0 to 10 (like the Step activity, Lesson 8)
+// Extra feature 2: quantity from 0 to 10 (like the Step activity, Lesson 8)
 function Quantity() {
   const [qty, setQty] = useState(0);
 
@@ -134,52 +126,45 @@ function Quantity() {
 
   return (
     <div className="qty">
-      <Button onClick={handleMinus} label="One less">
-        −
-      </Button>
+      <Button onClick={handleMinus}>-</Button>
       <span>{qty}</span>
-      <Button onClick={handlePlus} label="One more">
-        +
-      </Button>
+      <Button onClick={handlePlus}>+</Button>
     </div>
   );
 }
 
-// Reusable button: props.children + event handler passed as a prop (Lesson 6)
-function Button({ onClick, label, children }) {
+// Reusable button: props.children + event handler as a prop (Lesson 6)
+function Button(props) {
   return (
-    <button className="qty-btn" onClick={onClick} aria-label={label}>
-      {children}
+    <button className="qty-btn" onClick={props.onClick}>
+      {props.children}
     </button>
   );
 }
 
-// Open / closed message with the ternary operator (Lesson 4)
+// Open or closed message (ternary operator, Lesson 4)
 function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <Order closeHour={closeHour} />
+        <Order closeHour={10} />
       ) : (
-        <p className="closed-msg">
-          Sorry, we're closed. We open daily from {openHour}am to{" "}
-          {closeHour - 12}pm.
-        </p>
+        <p className="closed-msg">Sorry, we're closed. We open daily from 10am.</p>
       )}
-      <p className="copyright">Pizzeria Amore · Made with ♥ in React</p>
+      <p className="copyright">Pizzeria Amore - Made with love in React</p>
     </footer>
   );
 }
 
-// Order component extracted from Footer, with a default prop value (Lesson 6)
-function Order({ closeHour = 22 }) {
+// Order component taken out of Footer, with a default prop value (Lesson 6)
+function Order({ closeHour = 10 }) {
   function handleOrder() {
-    alert("Grazie! Thanks for your order!");
+    alert("Thanks for your order!");
   }
 
   return (
     <div className="order">
-      <p>We're currently open until {closeHour - 12}pm.</p>
+      <p>We're currently open until {closeHour}pm.</p>
       <button className="btn" onClick={handleOrder}>
         Order
       </button>

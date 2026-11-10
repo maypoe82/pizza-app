@@ -1,18 +1,9 @@
-/* Clean, light and friendly: Poppins font, white cards, red accent */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
-:root {
-  /* Italian flag colours */
-  --red: #cd212a;
-  --red-dark: #a51b22;
-  --green: #008c45;
-  --green-dark: #006b35;
-  --bg: #f7f2e9;
-  --card: #ffffff;
-  --text: #1f2430;
-  --text-soft: #6b7280;
-  --line: #e7eaf0;
-}
+/*
+  Italian colours
+  green: #008c45   red: #cd212a   cream: #f7f2e9
+*/
 
 * {
   margin: 0;
@@ -27,34 +18,52 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   font-size: 1.7rem;
-  line-height: 1.6;
-  color: var(--text);
-  background-color: var(--bg);
+  color: #1f2430;
+  background-color: #f7f2e9;
 }
 
 .container {
   max-width: 120rem;
   margin: 0 auto;
-  background-color: var(--bg);
-  min-height: 100vh;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
 }
 
-/* ---------- Top bar ---------- */
+/* ---------- Italian flag stripe ---------- */
+
+.flag {
+  display: flex;
+  height: 0.8rem;
+}
+
+.flag div {
+  width: 100%;
+}
+
+.flag .green {
+  background-color: #008c45;
+}
+
+.flag .white {
+  background-color: #ffffff;
+}
+
+.flag .red {
+  background-color: #cd212a;
+}
+
+/* ---------- Header ---------- */
 
 .header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1.6rem;
   padding: 3.2rem 4rem;
-  border-top: 8px solid;
-  border-image: linear-gradient(to right, #008c45 33.3%, #ffffff 33.3% 66.6%, #cd212a 66.6%) 1;
 }
 
 .hours {
   font-size: 1.5rem;
-  color: var(--text-soft);
+  color: #6b7280;
+  width: 15rem;
 }
 
 .brand {
@@ -62,7 +71,7 @@ body {
 }
 
 .header h1 {
-  color: var(--green);
+  color: #008c45;
   font-size: 6rem;
   line-height: 1.1;
   font-weight: 700;
@@ -72,12 +81,13 @@ body {
 
 .tagline {
   font-size: 1.8rem;
-  color: var(--text-soft);
+  color: #6b7280;
   letter-spacing: 1px;
 }
 
 .status {
-  justify-self: end;
+  width: 15rem;
+  text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
   padding: 0.6rem 1.6rem;
@@ -85,61 +95,31 @@ body {
 }
 
 .status.open {
-  color: var(--green);
+  color: #008c45;
   background-color: #e8f5e9;
 }
 
 .status.closed {
-  color: var(--red);
+  color: #cd212a;
   background-color: #fdecea;
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Welcome text ---------- */
 
 .hero {
   text-align: center;
-  padding: 4rem 2rem 2rem;
+  padding: 1.6rem 2rem 1rem;
 }
 
 .hero h2 {
-  color: var(--green-dark);
-  font-size: 3rem;
+  color: #006b35;
+  font-size: 2.2rem;
   font-weight: 700;
-  line-height: 1.2;
-  max-width: 70rem;
-  margin: 0 auto;
 }
 
 .hero p {
-  font-size: 1.8rem;
-  color: var(--text-soft);
-  margin-top: 1.2rem;
-}
-
-/* Italian flag stripe under the hero text */
-.flag {
-  display: flex;
-  width: 15rem;
-  height: 0.8rem;
-  margin: 3rem auto 0;
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.flag span {
-  flex: 1;
-}
-
-.flag span:nth-child(1) {
-  background-color: var(--green);
-}
-
-.flag span:nth-child(2) {
-  background-color: #ffffff;
-}
-
-.flag span:nth-child(3) {
-  background-color: var(--red);
+  font-size: 1.5rem;
+  color: #6b7280;
 }
 
 /* ---------- Menu ---------- */
@@ -154,16 +134,27 @@ body {
   font-weight: 700;
 }
 
+/* small red line under "Popular Pizzas" */
+.menu h2::after {
+  content: "";
+  display: block;
+  width: 5rem;
+  height: 3px;
+  margin: 0.8rem auto 0;
+  background-color: #cd212a;
+}
+
 .menu-hint {
   font-size: 1.6rem;
-  color: var(--text-soft);
+  color: #6b7280;
   margin: 0.8rem 0 4rem;
 }
 
+/* 3 pizzas in one row */
 .pizzas {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 3.2rem;
 }
 
@@ -174,23 +165,21 @@ body {
   align-items: center;
   gap: 0.8rem;
   padding: 3.2rem 2.4rem 2.8rem;
-  background-color: var(--card);
-  border: 1px solid var(--line);
+  background-color: #ffffff;
+  border: 1px solid #e7eaf0;
   border-radius: 2.4rem;
-  box-shadow: 0 6px 20px rgba(31, 36, 48, 0.06);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s;
 }
 
 .pizza:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 34px rgba(31, 36, 48, 0.12);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.14);
 }
 
-/* Round pizza photo */
+/* round pizza photo */
 .pizza img {
   width: 18rem;
   aspect-ratio: 1;
-  object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   margin-bottom: 1.2rem;
@@ -199,30 +188,35 @@ body {
 .pizza h3 {
   font-size: 2.2rem;
   font-weight: 600;
+  color: #006b35;
 }
 
 .pizza p {
   font-size: 1.5rem;
-  color: var(--text-soft);
-  margin-bottom: auto;
+  color: #6b7280;
 }
 
+/* price sits at the bottom with a dashed line above it */
 .price {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 1.6rem;
+  border-top: 1px dashed #e3d9c6;
   font-size: 2.4rem;
   font-weight: 700;
-  color: var(--red);
-  margin-top: 0.8rem;
+  color: #cd212a;
 }
 
-/* Sold out */
+/* ---------- Sold out ---------- */
+
 .badge {
   position: absolute;
   top: 1.6rem;
   left: 1.6rem;
   font-size: 1.3rem;
   font-weight: 600;
-  color: #fff;
-  background-color: var(--red);
+  color: #ffffff;
+  background-color: #cd212a;
   padding: 0.3rem 1.2rem;
   border-radius: 999px;
 }
@@ -234,12 +228,12 @@ body {
 
 .pizza.sold-out .price {
   font-size: 1.6rem;
-  color: var(--text-soft);
+  color: #6b7280;
 }
 
 /* ---------- Buttons ---------- */
 
-/* Heart in the top-right corner of each card */
+/* heart in the top-right corner */
 .fav-btn {
   position: absolute;
   top: 1.4rem;
@@ -247,20 +241,19 @@ body {
   width: 4.6rem;
   height: 4.6rem;
   border-radius: 50%;
-  border: 1px solid var(--line);
-  background-color: #fff;
-  color: var(--red);
+  border: 1px solid #e7eaf0;
+  background-color: #ffffff;
+  color: #cd212a;
   font-size: 2.2rem;
-  line-height: 1;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .fav-btn:hover,
 .fav-btn.active {
-  background-color: var(--red);
-  border-color: var(--red);
-  color: #fff;
+  background-color: #cd212a;
+  border-color: #cd212a;
+  color: #ffffff;
 }
 
 .qty {
@@ -273,7 +266,7 @@ body {
 .qty span {
   font-size: 2rem;
   font-weight: 600;
-  min-width: 2.4rem;
+  width: 2.4rem;
 }
 
 .qty-btn {
@@ -281,33 +274,35 @@ body {
   height: 4.4rem;
   border-radius: 50%;
   border: none;
-  background-color: var(--green);
-  color: #fff;
+  background-color: #008c45;
+  color: #ffffff;
   font-family: inherit;
   font-size: 2.4rem;
-  line-height: 1;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0, 140, 69, 0.3);
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .qty-btn:hover {
-  background-color: var(--green-dark);
-}
-
-button:focus-visible {
-  outline: 3px solid #90caf9;
-  outline-offset: 3px;
+  background-color: #006b35;
 }
 
 /* ---------- Footer ---------- */
 
 .footer {
   text-align: center;
-  border-bottom: 8px solid;
-  border-image: linear-gradient(to right, #008c45 33.3%, #ffffff 33.3% 66.6%, #cd212a 66.6%) 1;
-  padding: 5rem 2rem 3rem;
-  background-color: var(--bg);
+  padding: 2rem 2rem 3rem;
+}
+
+.order,
+.closed-msg {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 3.2rem 2.4rem;
+  background-color: #ffffff;
+  border-radius: 2.4rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .order {
@@ -315,47 +310,37 @@ button:focus-visible {
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-  font-size: 2rem;
-  font-weight: 500;
-}
-
-.closed-msg {
-  font-size: 2rem;
-  font-weight: 500;
 }
 
 .btn {
   font-family: inherit;
   font-size: 1.8rem;
   font-weight: 600;
-  color: #fff;
-  background-color: var(--red);
+  color: #ffffff;
+  background-color: #cd212a;
   border: none;
   border-radius: 999px;
   padding: 1.4rem 6rem;
   cursor: pointer;
-  box-shadow: 0 10px 22px rgba(205, 33, 42, 0.3);
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .btn:hover {
-  background-color: var(--red-dark);
+  background-color: #a51b22;
 }
 
 .copyright {
   margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
   font-size: 1.4rem;
-  color: var(--text-soft);
+  color: #6b7280;
 }
 
 /* ---------- Responsive ---------- */
 
-/* Small tablets: 2 cards per row */
+/* Tablets: 2 pizzas per row */
 @media (max-width: 760px) {
   .pizzas {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
   }
 
   .header h1 {
@@ -363,32 +348,26 @@ button:focus-visible {
   }
 }
 
-/* Phones: 1 card per row, top bar stacks */
+/* Phones: 1 pizza per row, header stacks */
 @media (max-width: 600px) {
   .header {
-    grid-template-columns: 1fr;
-    text-align: center;
+    flex-direction: column;
     padding: 2rem;
-  }
-
-  .status {
-    justify-self: center;
-  }
-
-  .menu {
-    padding: 5rem 2rem;
-  }
-
-  .pizzas {
-    grid-template-columns: 1fr;
   }
 
   .header h1 {
     font-size: 3.8rem;
   }
 
-  .hero h2 {
-    font-size: 2.4rem;
+  .menu {
+    padding: 4rem 2rem;
   }
 
+  .pizzas {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
 }
