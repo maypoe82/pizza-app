@@ -25,7 +25,7 @@ function Header() {
     <header className="header">
       <span className="logo">🍕</span>
       <div>
-        <h1>Bella Napoli</h1>
+        <h1>Maypoe's Pizzeria</h1>
         {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
       </div>
     </header>
