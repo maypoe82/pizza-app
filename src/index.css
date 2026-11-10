@@ -1,14 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap");
+/* Nunito: a round, friendly font that is easy to read */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap");
 
-/* Colours: tomato red, basil green, cream */
+/* Warm, high-contrast colours */
 :root {
-  --red: #b83227;
-  --red-dark: #8f241b;
-  --green: #2f5d3a;
-  --cream: #fdf8ef;
+  --red: #c62828;
+  --red-dark: #9c1f1f;
+  --green: #2e7d32;
+  --yellow: #ffc93c;
+  --cream: #fff8ec;
   --card: #ffffff;
-  --text: #2b2420;
-  --muted: #8a817a;
+  --text: #222222;
+  --text-soft: #4a4a4a;
 }
 
 * {
@@ -17,15 +19,17 @@
   box-sizing: border-box;
 }
 
+/* Bigger base size so text is easy to read */
 html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.5;
   color: var(--text);
   background-color: var(--cream);
-  min-height: 100vh;
 }
 
 .container {
@@ -34,31 +38,48 @@ body {
   min-height: 100vh;
 }
 
-/* ---------- Header: green banner, logo + name on the left ---------- */
+/* ---------- Header ---------- */
 
 .header {
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
-  padding: 2.4rem 4rem;
-  background-color: var(--green);
+  background-color: var(--red);
   color: #fff;
+  text-align: center;
+  padding: 3.2rem 2rem 3.6rem;
+  border-bottom: 8px solid var(--yellow);
 }
 
 .logo {
-  font-size: 4.8rem;
+  font-size: 6rem;
+  display: block;
 }
 
 .header h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 4rem;
-  font-weight: 700;
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 .tagline {
-  font-size: 1.6rem;
-  font-style: italic;
-  opacity: 0.85;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 1.6rem;
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  background-color: #fff;
+}
+
+.status.open {
+  color: var(--green);
+}
+
+.status.closed {
+  color: var(--red);
 }
 
 /* ---------- Menu ---------- */
@@ -66,227 +87,214 @@ body {
 .menu {
   flex: 1;
   width: 100%;
-  max-width: 96rem;
+  max-width: 110rem;
   margin: 0 auto;
-  padding: 4.8rem 2.4rem;
+  padding: 4rem 2rem 5rem;
 }
 
 .menu-title {
-  margin-bottom: 3.2rem;
+  text-align: center;
+  margin-bottom: 3.6rem;
 }
 
 .menu-title h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 3.2rem;
-  font-weight: 500;
-  border-left: 6px solid var(--red);
-  padding-left: 1.6rem;
+  font-size: 3.6rem;
+  font-weight: 900;
 }
 
 .menu-title p {
-  font-size: 1.6rem;
-  color: var(--muted);
-  margin-top: 0.8rem;
-  padding-left: 2.2rem;
+  font-size: 2rem;
+  color: var(--text-soft);
+  margin-top: 0.4rem;
 }
 
-/* One pizza per row: big photo on one side, text on the other */
+/* 2 big cards per row */
 .pizzas {
   list-style: none;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 3.2rem;
 }
 
 .pizza {
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
   background-color: var(--card);
-  border-radius: 1.6rem;
+  border-radius: 2.4rem;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-/* Every 2nd pizza: photo on the right side */
-.pizza:nth-child(even) {
-  flex-direction: row-reverse;
-}
-
-.pizza:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  border: 3px solid #f1e4cf;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .pizza img {
-  width: 45%;
-  aspect-ratio: 4 / 3;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
 }
 
 .pizza-info {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 3.2rem 4rem;
-  justify-content: center;
+  gap: 1.2rem;
+  padding: 2.4rem;
   flex: 1;
 }
 
+.pizza-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.6rem;
+}
+
 .pizza h3 {
-  font-family: "Playfair Display", serif;
-  font-size: 3rem;
-  font-weight: 500;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.price {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--red);
+  white-space: nowrap;
 }
 
 .pizza p {
-  font-size: 1.4rem;
-  font-weight: 300;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.pizza p {
-  font-size: 1.6rem;
+  font-size: 1.9rem;
+  color: var(--text-soft);
+  margin-bottom: auto;
 }
 
 .pizza-bottom {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 2.4rem;
+  gap: 1.6rem;
   margin-top: 0.8rem;
 }
 
-.price {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--red);
+/* Sold out: grey photo and a clear grey label */
+.pizza.sold-out img {
+  filter: grayscale();
+  opacity: 0.6;
 }
 
 .pizza.sold-out .price {
-  font-size: 1.5rem;
-  letter-spacing: 2px;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #777;
+  padding: 0.4rem 1.4rem;
+  border-radius: 999px;
 }
 
-.pizza.sold-out img {
-  filter: grayscale();
-  opacity: 0.7;
-}
+/* ---------- Buttons: big and easy to tap ---------- */
 
-.pizza.sold-out h3 {
-  color: var(--muted);
-}
-
-/* Favourite heart */
-.fav-btn {
-  font-size: 2.4rem;
-  line-height: 1;
-  color: var(--red);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.fav-btn:hover,
-.fav-btn.active {
-  transform: scale(1.2);
-}
-
-/* Quantity picker */
 .qty {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  font-size: 1.6rem;
-  font-weight: 700;
+  gap: 1.6rem;
+}
+
+.qty span {
+  font-size: 2.6rem;
+  font-weight: 900;
+  min-width: 3rem;
+  text-align: center;
 }
 
 .qty-btn {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 5.2rem;
+  height: 5.2rem;
   border-radius: 50%;
-  border: 2px solid var(--green);
-  background: none;
-  color: var(--green);
-  font-size: 1.8rem;
+  border: none;
+  background-color: var(--green);
+  color: #fff;
+  font-family: inherit;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
   cursor: pointer;
 }
 
 .qty-btn:hover {
-  background-color: var(--green);
+  background-color: #1b5e20;
+}
+
+.fav-btn {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--red);
+  background-color: #fff;
+  border: 3px solid var(--red);
+  border-radius: 999px;
+  padding: 1rem 2.2rem;
+  min-height: 5.2rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.fav-btn.active,
+.fav-btn:hover {
+  background-color: var(--red);
   color: #fff;
 }
 
-/* ---------- Footer: dark red band ---------- */
+/* Keyboard users can see which button is selected */
+button:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+/* ---------- Footer ---------- */
 
 .footer {
-  background-color: var(--red);
+  background-color: var(--green);
   color: #fff;
-  font-size: 1.6rem;
   text-align: center;
-  padding: 3.2rem 2.4rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  padding: 4rem 2rem;
 }
 
 .order {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2.4rem;
+  gap: 2rem;
 }
 
 .btn {
   font-family: inherit;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--red);
-  background-color: #fff;
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--text);
+  background-color: var(--yellow);
   border: none;
   border-radius: 999px;
-  padding: 1.2rem 3.6rem;
+  padding: 1.6rem 6rem;
   cursor: pointer;
-  transition: all 0.2s;
+  box-shadow: 0 4px 0 #d9a21f;
 }
 
 .btn:hover {
-  background-color: var(--cream);
-  transform: scale(1.05);
+  background-color: #ffd65c;
 }
 
 /* ---------- Responsive ---------- */
 
-/* Tablets: smaller padding */
-@media (max-width: 900px) {
-  .pizza-info {
-    padding: 2.4rem;
-  }
-
-  .pizza h3 {
-    font-size: 2.4rem;
-  }
-}
-
-/* Phones: photo on top, text below, header and footer stack */
-@media (max-width: 560px) {
-  .pizza,
-  .pizza:nth-child(even) {
-    flex-direction: column;
-  }
-
-  .pizza img {
-    width: 100%;
-  }
-
-  .header {
-    padding: 2rem;
+/* Phones: 1 card per row */
+@media (max-width: 700px) {
+  .pizzas {
+    grid-template-columns: 1fr;
   }
 
   .header h1 {
-    font-size: 3rem;
+    font-size: 3.8rem;
   }
 
-  .order {
-    flex-direction: column;
-    gap: 1.6rem;
+  .menu-title h2 {
+    font-size: 3rem;
   }
 }
