@@ -23,7 +23,12 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <span className="logo">🍕</span>
+      <div className="flag" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <p className="welcome">Benvenuti a</p>
       <h1>Pizzeria Amore</h1>
       {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
       {/* Easy-to-see open / closed badge (ternary, Lesson 4) */}
@@ -39,8 +44,8 @@ function Menu() {
   return (
     <main className="menu">
       <section className="menu-title">
-        <h2>Pick your pizza!</h2>
-        <p>Tap ♡ to like a pizza. Use − and + to choose how many.</p>
+        <h2>Il Nostro Menu</h2>
+        <p>Our menu · Tap ♡ to like a pizza, use − and + to choose how many.</p>
       </section>
 
       <ul className="pizzas">
@@ -94,7 +99,7 @@ function FavButton() {
       onClick={handleClick}
       aria-label={isFav ? "Remove from favourites" : "Add to favourites"}
     >
-      {isFav ? "♥ Liked" : "♡ Like"}
+      {isFav ? "♥ Saved" : "♡ Favourite"}
     </button>
   );
 }
@@ -137,7 +142,7 @@ function Footer() {
         <Order closeHour={closeHour} />
       ) : (
         <p>
-          Sorry, we're closed. Please come back tomorrow from {openHour}am.
+          Sorry, we're closed. We open daily from {openHour}am to {closeHour - 12}pm.
         </p>
       )}
     </footer>

@@ -1,16 +1,18 @@
-/* Nunito: a round, friendly font that is easy to read */
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap");
+/* Italian trattoria style: elegant serif headings + clear, readable body text */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Lato:wght@400;700&display=swap");
 
-/* Warm, high-contrast colours */
 :root {
-  --red: #c62828;
-  --red-dark: #9c1f1f;
-  --green: #2e7d32;
-  --yellow: #ffc93c;
-  --cream: #fff8ec;
-  --card: #ffffff;
-  --text: #222222;
-  --text-soft: #4a4a4a;
+  --basil: #1f4d36;
+  --basil-dark: #163a28;
+  --terracotta: #b5452d;
+  --gold: #c9a24d;
+  --paper: #f8f1e4;
+  --card: #fffdf8;
+  --text: #2a211b;
+  --text-soft: #5a4d42;
+  --flag-green: #008c45;
+  --flag-white: #f4f5f0;
+  --flag-red: #cd212a;
 }
 
 * {
@@ -19,17 +21,17 @@
   box-sizing: border-box;
 }
 
-/* Bigger base size so text is easy to read */
 html {
   font-size: 62.5%;
 }
 
+/* Large body text so it is easy to read for everyone */
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 1.8rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--text);
-  background-color: var(--cream);
+  background-color: var(--paper);
 }
 
 .container {
@@ -38,48 +40,83 @@ body {
   min-height: 100vh;
 }
 
+h1,
+h2,
+h3 {
+  font-family: "Cormorant Garamond", serif;
+}
+
 /* ---------- Header ---------- */
 
 .header {
-  background-color: var(--red);
-  color: #fff;
+  background-color: var(--basil);
+  color: var(--paper);
   text-align: center;
-  padding: 3.2rem 2rem 3.6rem;
-  border-bottom: 8px solid var(--yellow);
+  padding: 0 2rem 4rem;
 }
 
-.logo {
-  font-size: 6rem;
-  display: block;
+/* Italian flag stripe */
+.flag {
+  display: flex;
+  width: 12rem;
+  height: 0.8rem;
+  margin: 0 auto 3.2rem;
+}
+
+.flag span {
+  flex: 1;
+}
+
+.flag span:nth-child(1) {
+  background-color: var(--flag-green);
+}
+
+.flag span:nth-child(2) {
+  background-color: var(--flag-white);
+}
+
+.flag span:nth-child(3) {
+  background-color: var(--flag-red);
+}
+
+.welcome {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 2.4rem;
+  color: var(--gold);
 }
 
 .header h1 {
-  font-size: 5rem;
-  font-weight: 900;
+  font-size: 6.4rem;
+  font-weight: 700;
+  line-height: 1.1;
   letter-spacing: 1px;
 }
 
 .tagline {
-  font-size: 2.2rem;
-  font-weight: 600;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 2.4rem;
+  margin-top: 0.4rem;
 }
 
 .status {
   display: inline-block;
-  margin-top: 1.6rem;
-  padding: 0.8rem 2rem;
-  border-radius: 999px;
-  font-size: 1.8rem;
-  font-weight: 800;
-  background-color: #fff;
+  margin-top: 2rem;
+  padding: 0.6rem 2rem;
+  border: 2px solid var(--gold);
+  border-radius: 0.6rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .status.open {
-  color: var(--green);
+  color: #9be3b4;
 }
 
 .status.closed {
-  color: var(--red);
+  color: #ffb3a6;
 }
 
 /* ---------- Menu ---------- */
@@ -89,26 +126,36 @@ body {
   width: 100%;
   max-width: 110rem;
   margin: 0 auto;
-  padding: 4rem 2rem 5rem;
+  padding: 5rem 2rem 6rem;
 }
 
 .menu-title {
   text-align: center;
-  margin-bottom: 3.6rem;
+  margin-bottom: 4rem;
 }
 
 .menu-title h2 {
-  font-size: 3.6rem;
-  font-weight: 900;
+  font-size: 4.4rem;
+  font-weight: 700;
+  color: var(--basil);
+}
+
+/* small gold line under the title */
+.menu-title h2::after {
+  content: "";
+  display: block;
+  width: 8rem;
+  height: 2px;
+  background-color: var(--gold);
+  margin: 1rem auto 1.2rem;
 }
 
 .menu-title p {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--text-soft);
-  margin-top: 0.4rem;
 }
 
-/* 2 big cards per row */
+/* 2 cards per row */
 .pizzas {
   list-style: none;
   display: grid;
@@ -120,10 +167,16 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--card);
-  border-radius: 2.4rem;
+  border: 1px solid #e6d9c2;
+  border-radius: 0.8rem;
   overflow: hidden;
-  border: 3px solid #f1e4cf;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 22px rgba(60, 40, 20, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pizza:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(60, 40, 20, 0.14);
 }
 
 .pizza img {
@@ -135,8 +188,8 @@ body {
 .pizza-info {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  padding: 2.4rem;
+  gap: 1rem;
+  padding: 2.4rem 2.8rem 2.8rem;
   flex: 1;
 }
 
@@ -145,23 +198,28 @@ body {
   justify-content: space-between;
   align-items: baseline;
   gap: 1.6rem;
+  border-bottom: 1px dashed #d8c7a8;
+  padding-bottom: 1rem;
 }
 
 .pizza h3 {
-  font-size: 2.6rem;
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--basil);
 }
 
 .price {
-  font-size: 2.8rem;
-  font-weight: 900;
-  color: var(--red);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--terracotta);
   white-space: nowrap;
 }
 
 .pizza p {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
+  font-style: italic;
   color: var(--text-soft);
   margin-bottom: auto;
 }
@@ -171,21 +229,26 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 1.6rem;
-  margin-top: 0.8rem;
+  margin-top: 1.2rem;
 }
 
-/* Sold out: grey photo and a clear grey label */
+/* Sold out */
 .pizza.sold-out img {
   filter: grayscale();
   opacity: 0.6;
 }
 
+.pizza.sold-out h3 {
+  color: var(--text-soft);
+}
+
 .pizza.sold-out .price {
-  font-size: 2rem;
-  color: #fff;
-  background-color: #777;
-  padding: 0.4rem 1.4rem;
-  border-radius: 999px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-soft);
 }
 
 /* ---------- Buttons: big and easy to tap ---------- */
@@ -193,69 +256,71 @@ body {
 .qty {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1.4rem;
 }
 
 .qty span {
-  font-size: 2.6rem;
-  font-weight: 900;
+  font-size: 2.4rem;
+  font-weight: 700;
   min-width: 3rem;
   text-align: center;
 }
 
 .qty-btn {
-  width: 5.2rem;
-  height: 5.2rem;
+  width: 4.8rem;
+  height: 4.8rem;
   border-radius: 50%;
-  border: none;
-  background-color: var(--green);
-  color: #fff;
+  border: 2px solid var(--basil);
+  background-color: transparent;
+  color: var(--basil);
   font-family: inherit;
-  font-size: 3rem;
-  font-weight: 800;
+  font-size: 2.6rem;
   line-height: 1;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .qty-btn:hover {
-  background-color: #1b5e20;
+  background-color: var(--basil);
+  color: var(--paper);
 }
 
 .fav-btn {
   font-family: inherit;
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--red);
-  background-color: #fff;
-  border: 3px solid var(--red);
-  border-radius: 999px;
-  padding: 1rem 2.2rem;
-  min-height: 5.2rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  background-color: transparent;
+  border: 2px solid var(--terracotta);
+  border-radius: 0.6rem;
+  padding: 1rem 2rem;
+  min-height: 4.8rem;
   cursor: pointer;
   margin-left: auto;
+  transition: all 0.2s;
 }
 
 .fav-btn.active,
 .fav-btn:hover {
-  background-color: var(--red);
+  background-color: var(--terracotta);
   color: #fff;
 }
 
 /* Keyboard users can see which button is selected */
 button:focus-visible {
-  outline: 4px solid var(--yellow);
+  outline: 3px solid var(--gold);
   outline-offset: 3px;
 }
 
 /* ---------- Footer ---------- */
 
 .footer {
-  background-color: var(--green);
-  color: #fff;
+  background-color: var(--basil-dark);
+  color: var(--paper);
   text-align: center;
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2rem;
   padding: 4rem 2rem;
+  border-top: 4px solid var(--gold);
 }
 
 .order {
@@ -267,34 +332,35 @@ button:focus-visible {
 
 .btn {
   font-family: inherit;
-  font-size: 2.6rem;
-  font-weight: 900;
-  color: var(--text);
-  background-color: var(--yellow);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--basil-dark);
+  background-color: var(--gold);
   border: none;
-  border-radius: 999px;
+  border-radius: 0.6rem;
   padding: 1.6rem 6rem;
   cursor: pointer;
-  box-shadow: 0 4px 0 #d9a21f;
+  transition: all 0.2s;
 }
 
 .btn:hover {
-  background-color: #ffd65c;
+  background-color: #dbb862;
 }
 
 /* ---------- Responsive ---------- */
 
-/* Phones: 1 card per row */
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .pizzas {
     grid-template-columns: 1fr;
   }
 
   .header h1 {
-    font-size: 3.8rem;
+    font-size: 4.6rem;
   }
 
   .menu-title h2 {
-    font-size: 3rem;
+    font-size: 3.6rem;
   }
 }
