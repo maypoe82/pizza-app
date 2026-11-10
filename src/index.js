@@ -13,29 +13,50 @@ function App() {
   return (
     <div className="container">
       <Header />
+      <Hero />
       <Menu />
       <Footer />
     </div>
   );
 }
 
-// Header banner. Tagline only shows when the shop is open (&& operator, Lesson 4)
+// Top bar. Tagline only shows when the shop is open (&& operator, Lesson 4)
 function Header() {
   return (
     <header className="header">
-      <div className="flag" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
+      <p className="hours">
+        Daily {openHour}am – {closeHour - 12}pm
+      </p>
+
+      <div className="brand">
+        <h1>Pizzeria Amore</h1>
+        {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
       </div>
-      <p className="welcome">Benvenuti a</p>
-      <h1>Pizzeria Amore</h1>
-      {isOpen && <p className="tagline">Authentic Italian Cuisine</p>}
-      {/* Easy-to-see open / closed badge (ternary, Lesson 4) */}
+
+      {/* Open / closed badge (ternary, Lesson 4) */}
       <p className={isOpen ? "status open" : "status closed"}>
-        {isOpen ? "● Open now" : "● Closed now"} · {openHour}am – {closeHour - 12}pm
+        {isOpen ? "● Open now" : "● Closed now"}
       </p>
     </header>
+  );
+}
+
+// Big welcome section with a round pizza photo
+function Hero() {
+  return (
+    <section className="hero">
+      <h2>Fresh Italian pizza, made with amore</h2>
+      <p>Stone-baked in Naples style. Pick your favourite below.</p>
+
+      <div className="hero-pic">
+        <img src="pizzas/prosciutto.jpg" alt="Pizza Prosciutto" />
+        {/* Floating ingredients just for decoration */}
+        <span className="deco deco-1" aria-hidden="true">🍅</span>
+        <span className="deco deco-2" aria-hidden="true">🌿</span>
+        <span className="deco deco-3" aria-hidden="true">🧄</span>
+        <span className="deco deco-4" aria-hidden="true">🫒</span>
+      </div>
+    </section>
   );
 }
 
@@ -43,10 +64,10 @@ function Header() {
 function Menu() {
   return (
     <main className="menu">
-      <section className="menu-title">
-        <h2>Il Nostro Menu</h2>
-        <p>Our menu · Tap ♡ to like a pizza, use − and + to choose how many.</p>
-      </section>
+      <h2>Popular Pizzas</h2>
+      <p className="menu-hint">
+        Tap ♡ to save a favourite, use − and + to choose how many.
+      </p>
 
       <ul className="pizzas">
         {pizzaData.map((pizza) => (
@@ -68,19 +89,17 @@ function Menu() {
 function Pizza({ name, ingredients, price, photoName, soldOut }) {
   return (
     <li className={soldOut ? "pizza sold-out" : "pizza"}>
+      {/* Sold out badge (&&, Lesson 4) */}
+      {soldOut && <span className="badge">Sold out</span>}
+      <FavButton />
+
       <img src={photoName} alt={name} />
-      <div className="pizza-info">
-        <div className="pizza-top">
-          <h3>{name}</h3>
-          <span className="price">{soldOut ? "Sold out" : "$" + price}</span>
-        </div>
-        <p>{ingredients}</p>
-        <div className="pizza-bottom">
-          {/* Quantity picker only shows if the pizza is not sold out (&&, Lesson 4) */}
-          {!soldOut && <Quantity />}
-          <FavButton />
-        </div>
-      </div>
+      <h3>{name}</h3>
+      <p>{ingredients}</p>
+      <span className="price">{soldOut ? "Not available" : "$" + price}</span>
+
+      {/* Quantity picker only shows if the pizza is not sold out (&&, Lesson 4) */}
+      {!soldOut && <Quantity />}
     </li>
   );
 }
@@ -99,7 +118,7 @@ function FavButton() {
       onClick={handleClick}
       aria-label={isFav ? "Remove from favourites" : "Add to favourites"}
     >
-      {isFav ? "♥ Saved" : "♡ Favourite"}
+      {isFav ? "♥" : "♡"}
     </button>
   );
 }
@@ -118,9 +137,13 @@ function Quantity() {
 
   return (
     <div className="qty">
-      <Button onClick={handleMinus} label="One less">−</Button>
+      <Button onClick={handleMinus} label="One less">
+        −
+      </Button>
       <span>{qty}</span>
-      <Button onClick={handlePlus} label="One more">+</Button>
+      <Button onClick={handlePlus} label="One more">
+        +
+      </Button>
     </div>
   );
 }
@@ -141,10 +164,12 @@ function Footer() {
       {isOpen ? (
         <Order closeHour={closeHour} />
       ) : (
-        <p>
-          Sorry, we're closed. We open daily from {openHour}am to {closeHour - 12}pm.
+        <p className="closed-msg">
+          Sorry, we're closed. We open daily from {openHour}am to{" "}
+          {closeHour - 12}pm.
         </p>
       )}
+      <p className="copyright">Pizzeria Amore · Made with ♥ in React</p>
     </footer>
   );
 }
@@ -152,7 +177,7 @@ function Footer() {
 // Order component extracted from Footer, with a default prop value (Lesson 6)
 function Order({ closeHour = 22 }) {
   function handleOrder() {
-    alert("Thanks for your order!");
+    alert("Grazie! Thanks for your order!");
   }
 
   return (
